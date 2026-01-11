@@ -1,0 +1,24 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const passportLocalMongoose = require("passport-local-mongoose").default;
+
+
+const userSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  }
+});
+
+/*
+ passport-local-mongoose automatically adds:
+ - username
+ - hash
+ - salt
+ - authenticate(), register(), serializeUser(), deserializeUser()
+ and handles PASSWORD HASHING securely
+*/
+userSchema.plugin(passportLocalMongoose);
+
+module.exports = mongoose.model("User", userSchema);

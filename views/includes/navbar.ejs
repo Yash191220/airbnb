@@ -1,0 +1,54 @@
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+
+    <!-- Left: Brand -->
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <button 
+      class="navbar-toggler" 
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+      <!-- LEFT LINKS -->
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+      <div class="navbar-nav ms-auto">
+          <form class="nav-search" action="/listings/search" method="GET">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              name="q"
+              placeholder="Search destinations"
+              required
+            />
+          </form>
+      </div>
+      <!-- RIGHT LINKS -->
+      <div class="navbar-nav ms-auto">
+        <% if (currUser !== null) { %>
+          <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <% } %>
+
+        <% if (currUser === null) { %>
+          <!-- Not logged in -->
+          <a class="nav-link" href="/signup"><b>Signup</b></a>
+          <a class="nav-link" href="/login"><b>Login</b></a>
+        <% } else { %>
+          <!-- Logged in -->
+          <span class="nav-link">
+            <b>Hello, <%= currUser.username %></b>
+          </span>
+          <a class="nav-link" href="/logout"><b>Logout</b></a>
+        <% } %>
+      </div>
+
+
+    </div>
+  </div>
+</nav>

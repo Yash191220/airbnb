@@ -1,0 +1,83 @@
+<% layout("/layouts/boilerplate") %>
+
+<% if (allListings.length === 0) { %>
+  <p class="text-center mt-5 text-muted fs-5">
+    No listings match your search.
+  </p>
+<% } %>
+
+<!-- ================= FILTERS ================= -->
+<div id="filters" class="filters-bar">
+  <div class="filter">
+    <i class="fa-solid fa-fire"></i>
+    <p>Trending</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-bed"></i>
+    <p>Rooms</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-mountain-city"></i>
+    <p>Iconic Cities</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-mountain"></i>
+    <p>Mountains</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-person-swimming"></i>
+    <p>Pools</p>
+  </div>
+  <div class="filter">
+    <i class="fa-solid fa-campground"></i>
+    <p>Camping</p>
+  </div>
+
+  <div class="tax-toggle ms-auto">
+    <div class="form-check form-switch">
+      <label class="form-check-label">Display total after taxes</label>
+      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+    </div>
+  </div>
+</div>
+
+<!-- ================= LISTINGS GRID ================= -->
+<div class="explore-grid">
+  <% for (let listing of allListings) { %>
+    <a href="/listings/<%= listing._id %>" class="listing-link">
+      <div class="listing-card-modern">
+
+        <!-- Image -->
+        <div class="listing-img">
+          <img src="<%= listing.image.url %>" alt="listing image">
+        </div>
+
+        <!-- Info -->
+        <div class="listing-info">
+          <h6 class="listing-title"><%= listing.title %></h6>
+
+          <p class="listing-location">
+            <i class="fa-solid fa-location-dot"></i>
+            <%= listing.location %>, <%= listing.country %>
+          </p>
+
+          <div class="listing-price">
+            ₹ <%= listing.price.toLocaleString("en-IN") %>
+            <span class="tax-info"> +18% GST</span>
+          </div>
+        </div>
+
+      </div>
+    </a>
+  <% } %>
+</div>
+
+<!-- ================= TAX SCRIPT ================= -->
+<script>
+  const taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    document.querySelectorAll(".tax-info").forEach(el => {
+      el.style.display = el.style.display === "inline" ? "none" : "inline";
+    });
+  });
+</script>
